@@ -70,22 +70,11 @@ class Application:
             image = image.astype('float32') / 255
             image = np.expand_dims(image, axis=0)
 
-            # Load the saved model
             model = tf.keras.models.load_model("gesture_model.h5")
-
-            # Make a prediction using the model
             prediction = model.predict(image)
-
             print(prediction)
-
-            # Get the index of the predicted gesture
             predicted_gesture_index = np.argmax(prediction[0])
-
-            # Look up the predicted gesture name in the lookup dictionary
             predicted_gesture_name = list(lookup.keys())[list(lookup.values()).index(predicted_gesture_index)]
-            
-
-            # Display the predicted gesture name in the GUI label
             self.gesture_label.configure(text=f"Predicted gesture: {predicted_gesture_name}")
 
 
